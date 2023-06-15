@@ -1,0 +1,28 @@
+-Skapa kluster
+
+
+- gå till https://freedns.afraid.org/
+- SKAPA TVÅ subdomäner - en för frontend och en för backend
+
+SKRIV DOM HÄR: 
+    min frontend = 
+    min backend = 
+
+- kör 01-namespace
+
+- kör 05-pvc
+- kör 06-mysql
+
+- kubectl --kubeconfig=c:\temp\linode.yaml --namespace=yatest get pods
+- ta den som heter mysql-xxxxxxx-xxxx och
+- kubectl --kubeconfig=c:\temp\linode.yaml --namespace=yatest exec -it mysql-5f46cd7d5c-jz9xj sh
+- mysql -p
+- Hejsan123
+- create database salary;
+- exit;
+- exit
+
+- kör 10-yafront (ÄNDRA URL ENL TEXT I FILEN)
+- kör 11-yagmebackend
+- kör 50-ingresscontroller
+- kör 61-yaingress (men ändra hosts till din frontend resp backend)

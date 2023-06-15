@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: yatest
+  name: gamefrontend
+  labels:
+    app: gamefrontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gamefrontend
+  template:
+    metadata:
+      labels:
+        app: gamefrontend
+    spec:
+      containers:
+      - name: gamefrontend
+        image: stefanholmberg/yafront
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RUNENVIRONMENT
+          value: "Production"
+        - name: REACT_APP_BACKEND_URL
+          value: "http://hockey11111.chickenkiller.com"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: yatest
+  name: gamefrontend-service
+  labels:
+    app: gamefrontend
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: gamefrontend

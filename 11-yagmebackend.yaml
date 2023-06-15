@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: yatest
+  name: gamebackend
+  labels:
+    app: gamebackend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gamebackend
+  template:
+    metadata:
+      labels:
+        app: gamebackend
+    spec:
+      containers:
+      - name: gamebackend
+        image: stefanholmberg/yaback
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: RUNENVIRONMENT
+          value: "Production"
+        - name: DB_DATABASE
+          value: "salary"
+        - name: DB_PASSWORD
+          value: "Hejsan123"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: yatest
+  name: gamebackend-service
+  labels:
+    app: gamebackend
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: gamebackend
