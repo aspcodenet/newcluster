@@ -1,28 +1,44 @@
 -Skapa kluster
+- från linode ladda ner Kubeconfig
+- lägg filen i c:\temp\linode.yaml
+(skapa c:\temp om den inte finns)
 
+
+- kör 01-ingresscontroller
+dvs kubectl --kubeconfig=c:\temp\linode.yaml  apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.1/deploy/static/provider/cloud/deploy.yaml
+
+- gå till Linode   Node Balancers
+ta IP addressen tex  194.195.247.133
+
+och den ska vi använda i ->
 
 - gå till https://freedns.afraid.org/
 - SKAPA TVÅ subdomäner - en för frontend och en för backend
+och kopiera in ipadressen!!
 
 SKRIV DOM HÄR: 
-    min frontend = 
-    min backend = 
+    min frontend = stefansfrontend.crabdance.com
+    min backend = stefansbackend.crabdance.com
 
-- kör 01-namespace
+- kör 02-namespace (kubectl --kubeconfig=c:\temp\linode.yaml apply -f 02-namespace.yaml)
 
 - kör 05-pvc
 - kör 06-mysql
 
 - kubectl --kubeconfig=c:\temp\linode.yaml --namespace=yatest get pods
 - ta den som heter mysql-xxxxxxx-xxxx och
-- kubectl --kubeconfig=c:\temp\linode.yaml --namespace=yatest exec -it mysql-5f46cd7d5c-jz9xj sh
+- kubectl --kubeconfig=c:\temp\linode.yaml --namespace=yatest exec -it mysql-5f46cd7d5c-9s66l sh
 - mysql -p
 - Hejsan123
+nu står det mysql>
 - create database salary;
 - exit;
 - exit
 
 - kör 10-yafront (ÄNDRA URL ENL TEXT I FILEN)
 - kör 11-yagmebackend
-- kör 50-ingresscontroller
 - kör 61-yaingress (men ändra hosts till din frontend resp backend)
+
+
+- SURFA TILL ER frontendurl
+stefansfrontend.crabdance.com

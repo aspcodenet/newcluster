@@ -1,3 +1,8 @@
+
+
+# DU MÅSTE ÄNDRA http://hockey11111.chickenkiller.com
+# till den url som din BACKEND ska ha
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,7 +30,7 @@ spec:
         - name: RUNENVIRONMENT
           value: "Production"
         - name: REACT_APP_BACKEND_URL
-          value: "http://hockey11111.chickenkiller.com"
+          value: "http://stefansbackend.crabdance.com"
 ---
 apiVersion: v1
 kind: Service
